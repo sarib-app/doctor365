@@ -16,6 +16,8 @@ import GetContactsFunction from '../GetContacts/GetContacts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert, View } from 'react-native';
 import InitialLoading from '../../Global/components/InitialLoading';
+import TakeAppointmentScreen from '../Booking/BookDoc';
+import CheckupDetails from '../Checkupdetail/Checkupdetail';
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
@@ -49,6 +51,8 @@ getAsynData()
           <Stack.Screen name="Signup" component={SignupScreen} options={{ headerShown: false }} />
           <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={{ headerShown: false }} />
           <Stack.Screen name="KycForm" component={KycForm} options={{ headerShown: false }} />
+          <Stack.Screen name="TakeAppointmentScreen" component={TakeAppointmentScreen} options={{ headerShown: false }} />
+
           <Stack.Screen name="TakeLoanScreen" component={TakeLoanScreen} options={{ headerShown: false }} />
           <Stack.Screen name="CheckupHistoryScreen" component={LoanHistoryScreen} options={{ headerShown: false }} />
           <Stack.Screen name="DepositHistoryScreen" component={DepositHistoryScreen} options={{ headerShown: false }} />
@@ -57,6 +61,8 @@ getAsynData()
           <Stack.Screen name="PayBackForm" component={PayBackForm} options={{ headerShown: false }} />
           <Stack.Screen name="MockUpScreen" component={MockUpScreen} options={{ headerShown: false }} />
           <Stack.Screen name="GetContactsFunction" component={GetContactsFunction} options={{ headerShown: false }} />
+          <Stack.Screen name="CheckupDetails" component={CheckupDetails} options={{ headerShown: false }} />
+
   
         </Stack.Navigator>
       </NavigationContainer>

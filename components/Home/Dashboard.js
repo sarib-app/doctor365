@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import GlobalStyles from '../../Global/Branding/GlobalStyles';
 
@@ -11,7 +11,33 @@ import InputTitle from '../../Global/components/InputTitle';
 const DashboardScreen = ({loanTaken,loanRec,depositRec}) => {
   const navigation = useNavigation()
 
+  const targetDate = new Date('2024-12-09T00:00:00'); // Target date
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
+  // Function to calculate the remaining time
+  function calculateTimeLeft() {
+    const now = new Date();
+    const difference = targetDate - now;
+
+    if (difference > 0) {
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+      return { hours, minutes, seconds };
+    }
+    return { hours: 0, minutes: 0, seconds: 0 }; // Countdown ended
+  }
+
+  // Update the timer every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(timer);
+  }, []);
+  
 
 
   function RecordCard({
@@ -23,6 +49,17 @@ const DashboardScreen = ({loanTaken,loanRec,depositRec}) => {
     amount,
     interest
   }) {
+
+
+
+
+
+
+
+
+
+
+
     function RowRecord({
         value, title,
         style
@@ -111,7 +148,9 @@ const DashboardScreen = ({loanTaken,loanRec,depositRec}) => {
           Next Booking in
         </Text>
         <Text style={HomeStyles.TopCardTitle}>
-        20:12:00
+        {`${String(timeLeft.hours).padStart(2, '0')}:${String(
+          timeLeft.minutes
+        ).padStart(2, '0')}:${String(timeLeft.seconds).padStart(2, '0')}`}
         </Text>
         </View>
         <TouchableOpacity
@@ -155,14 +194,14 @@ const DashboardScreen = ({loanTaken,loanRec,depositRec}) => {
         </View>
         <TouchableOpacity 
         onPress={()=>{
-          navigation.navigate("TakeLoanScreen")
+          navigation.navigate("TakeAppointmentScreen")
 
           if(loanTaken === "pending"){
             
             Alert.alert("Wait","Please keep patience our team is reviewing your loan request, it will be approved soon.")
           }else{
 
-            navigation.navigate("TakeLoanScreen")
+            navigation.navigate("TakeAppointmentScreen")
           }
         }}
         // onPress={()=> navigation.navigate("CustomerForm")}

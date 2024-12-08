@@ -9,7 +9,7 @@ import HistoryStyles from "./HistoryStyle";
 import { FlatList } from "react-native-gesture-handler";
 import Header from "../../Global/components/Header";
 import getAsyncuser from "../../Global/components/getAsyncUser";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { getLoanList } from "../../Global/Calls/ApiCalls";
 import AnimatedLottieView from "lottie-react-native";
 import Nodata from '../../assets/Animationn/Nodata.json'
@@ -18,6 +18,7 @@ import moment from "moment";
 import InitialLoading from "../../Global/components/InitialLoading";
 import NodataFound from "../../Global/components/NoDataFound";
 function LoanHistoryScreen(){
+    const navigation = useNavigation()
     const data =[
         {
         LoanAmount:"2000",
@@ -151,7 +152,12 @@ const CardDesc={
         </View>
         {/* <MaterialIcons name="bookmark-added" size={24} color={Colors.PrimaryColor} /> */}
         {/* <Entypo name="eye" size={20} color={Colors.PrimaryColor} /> */}
+        <TouchableOpacity
+        onPress={()=> navigation.navigate("CheckupDetails")}
+        >
+
         <FontAwesome5 name="eye" size={20} color={Colors.PrimaryColor} />
+        </TouchableOpacity>
         </View>
         <View style={[GlobalStyles.RowMaker,{justifyContent:'space-between'}]}>
 

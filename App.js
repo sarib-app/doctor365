@@ -5,6 +5,7 @@ import AuthStack from './components/AuthStack/AuthStack';
 export default function App() {
   return (
     // <View style={styles.container}>
+    
    <AuthStack/>
     // </View>
   );

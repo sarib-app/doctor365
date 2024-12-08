@@ -11,7 +11,6 @@ Container:{
     width:WindowWidth,
     height:WindowHeight,
     backgroundColor:Colors.BgColor,
-    
     alignItems:'center'
 },
 Header:{
